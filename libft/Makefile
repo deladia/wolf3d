@@ -29,7 +29,7 @@ SRC = ft_memalloc.c ft_putendl.c ft_strcpy.c ft_strmapi.c ft_strsub.c \
 	ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
 	ft_iterative_power.c ft_sqrt.c ft_is_negative.c ft_iterative_factorial.c \
 	ft_range.c get_next_line.c ft_atof.c ft_strcmp_len.c ft_lstadd_back.c ft_lstsize.c \
-	ft_strchr_ind.c
+	ft_strchr_ind.c ft_isalpha_cap.c
 
 FLAGS = -Wall -Wextra -Werror
 

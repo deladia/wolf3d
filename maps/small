@@ -1,8 +1,8 @@
 R 1920 1080
 NO ./textures/redbrick.xpm
-SO ./textures/bluestone.xpm     
+SO ./textures/redbrick.xpm     
 EA ./textures/redbrick.xpm
-WE ./textures/wood.xpm
+WE ./textures/wall.xpm
 S ./textures/redbrick.xpm
 S ./textures/redbrick.xpm
 S ./textures/redbrick.xpm
@@ -11,5 +11,5 @@ C 100,0,255
 
 11111
 10001
-12P21
+10PA1
 11111

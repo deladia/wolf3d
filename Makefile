@@ -16,6 +16,8 @@ SRC				=	main.c \
 					parser.c \
 					utils.c \
 					parse_flag.c \
+					valid_map.c \
+					flood_fill.c \
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))
 OBJS			=	$(addprefix $(OBJS_DIR), $(OBJ))

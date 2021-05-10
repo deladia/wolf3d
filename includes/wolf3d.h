@@ -36,8 +36,7 @@ typedef struct	s_xy
 
 typedef struct	s_plr
 {
-	float		x;
-	float		y;
+	t_xy		coor;
 	t_xy		dir;
 	t_xy		plane;
 }				t_plr;
@@ -49,6 +48,13 @@ typedef struct	s_mlx
 	void		*mlx_ptr;
 }				t_mlx;
 
+//key заглавная буква - коэф  и будет индекс спрайта в t_texture *spr
+typedef struct	s_coor_spr
+{
+	t_xy				coor;
+	int					key;
+	struct s_coor_spr	*next;
+}				t_coor_spr;
 
 typedef struct	s_wolf
 {
@@ -56,8 +62,8 @@ typedef struct	s_wolf
 	t_plr		plr;
 	t_texture	*tex;
 	t_texture	*spr;
+	t_coor_spr	*coor_spr;
 	char		**map;
-
 }				t_wolf;
 
 int				cnt_word(char **words);
@@ -71,6 +77,8 @@ t_texture		*ft_texnew(int *tex, int w, int h, int key);
 
 void			init_r(char **word, t_wolf *wolf);
 void			init_tex(char **word, t_wolf *wolf, int key);
+int				valid_map(t_wolf *wolf);
+int				flood_fill(char **map, int i, int j);
 
 t_list			*ft_lstnew_cus(char const *content);
 void			ft_exit(char *error_message);

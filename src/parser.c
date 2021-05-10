@@ -49,6 +49,7 @@ void	check_flag(char **word, t_wolf *wolf, int *valid)
 void	move_map(t_list *list, t_wolf *wolf)
 {
 	t_list	*tmp;
+	t_list	*ff;
 	int		i;
 
 	wolf->map = (char **)ft_memalloc((sizeof(char *) + 1) * ft_lstsize(list));
@@ -57,29 +58,33 @@ void	move_map(t_list *list, t_wolf *wolf)
 	while (tmp != NULL)
 	{
 		wolf->map[i] = (char *)tmp->content;
+		ff = tmp;
 		tmp = tmp->next;
+		free(ff);
+		// ff = NULL;
 		i++;
 	}
+	wolf->map[i] = NULL;
 }
 
-void	valid_map(t_wolf *wolf)
-{
-	int	i;
-	int	j;
+// void	valid_map(t_wolf *wolf)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (wolf->map[i] != NULL)
-	{
-		j = 0;
-		while(wolf->map[i][j] != '\0')
-		{
-			if (ft_strchr_ind("012P", wolf->map[i][j]) == 0)
-				ft_exit("Wrong sym in map");
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (wolf->map[i] != NULL)
+// 	{
+// 		j = 0;
+// 		while(wolf->map[i][j] != '\0')
+// 		{
+// 			if (ft_strchr_ind("012P", wolf->map[i][j]) == 0)
+// 				ft_exit("Wrong sym in map");
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	parse_map(int fd, char *line, t_wolf *wolf)
 {
@@ -94,10 +99,10 @@ void	parse_map(int fd, char *line, t_wolf *wolf)
 		ft_lstadd_back(&list, ft_lstnew_cus(line));
 		free(line);
 	}
-	// move_map(list, wolf);
+	move_map(list, wolf);
 	//free(list);
-	// valid_map(wolf);
-	wolf->plr.x = 5;
+	valid_map(wolf);
+	// wolf->plr.x = 5;
 }
 
 void	parse_flag(char *line, t_wolf *wolf, int *valid)
