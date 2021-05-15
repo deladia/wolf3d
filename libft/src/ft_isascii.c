@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_isascii(int ch)
+int	ft_isascii(int ch)
 {
 	if (0 <= ch && ch <= 127)
 		return (1);

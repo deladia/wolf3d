@@ -22,8 +22,7 @@ char	*ft_strndup(const char *s1, size_t n)
 	j = 0;
 	while (s1[i] && i < n)
 		i++;
-	if (!(result = ft_memalloc(i + 1)))
-		return (NULL);
+	result = ft_memalloc(i + 1);
 	while (s1[j] && j < n)
 	{
 		result[j] = s1[j];

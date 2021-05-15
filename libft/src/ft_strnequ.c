@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-int		ft_strnequ(char const *s1, char const *s2, size_t n)
+int	ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s1 || !s2)

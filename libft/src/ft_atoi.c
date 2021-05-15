@@ -12,22 +12,32 @@
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+void	ft_sign(const char *str, int *sign)
 {
-	int res;
-	int sign;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
+		str++;
+	if (*str == '+')
+		str++;
+	else if (*str == '-')
+	{
+		str++;
+		*sign *= -1;
+	}
+	while (*str == '0')
+		str++;
+}
+
+int	ft_atoi(const char *str)
+{
+	int	res;
+	int	sign;
 
 	sign = 1;
 	res = 0;
-	if (*str == ' ' || *str == '+' || *str == '-' ||
-		(*str >= 48 && *str <= 57) || (*str >= 9 && *str <= 13))
+	if (*str == ' ' || *str == '+' || *str == '-'
+		|| (*str >= 48 && *str <= 57) || (*str >= 9 && *str <= 13))
 	{
-		while ((*str >= 9 && *str <= 13) || *str == ' ')
-			str++;
-		if (*str == '+' || (*str == '-' && (sign *= -1)))
-			str++;
-		while (*str == '0')
-			str++;
+		ft_sign(str, &sign);
 		while (*str >= 48 && *str <= 57)
 		{
 			res = res * 10 + *str - '0';

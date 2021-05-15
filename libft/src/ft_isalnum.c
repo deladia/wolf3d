@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_isalnum(int ch)
+int	ft_isalnum(int ch)
 {
 	if ('0' <= ch && ch <= '9')
 		return (1);

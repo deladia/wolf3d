@@ -14,7 +14,7 @@
 
 static int	atoi_shift(char **s, size_t *i)
 {
-	int number;
+	int	number;
 
 	number = ft_atoi(*s);
 	*i = 0;
@@ -33,7 +33,7 @@ static int	atoi_shift(char **s, size_t *i)
 	return (number);
 }
 
-double		ft_atof(char *s)
+double	ft_atof(char *s)
 {
 	size_t			i;
 	double			number;

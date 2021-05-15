@@ -6,8 +6,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-
-typedef struct 			s_texture
+typedef struct s_texture
 {
 	int					*image;
 	int					width;
@@ -28,7 +27,7 @@ enum	e_name
 	c
 };
 
-typedef struct	s_xy
+typedef struct s_xy
 {
 	float		x;
 	float		y;
@@ -46,10 +45,12 @@ typedef struct s_buf_spr
 	int			draw_end_y;
 	int			draw_start_x;
 	int			draw_end_x;
+	int			tex_x;
+	int			tex_y;
+	int			stripe;
 }				t_buf_spr;
 
-
-typedef struct	s_buf_tex
+typedef struct s_buf_tex
 {
 	float		step;
 	float		tex_pos;
@@ -57,11 +58,9 @@ typedef struct	s_buf_tex
 	int			tex_y;
 }				t_buf_tex;
 
-typedef struct	s_buf_floor
+typedef struct s_buf_floor
 {
 	t_xy		floor_wall;
-	// float		dist_wall;
-	// float		dist_plr;
 	float		dist_cur;
 	int			y;
 	float		weight;
@@ -70,7 +69,7 @@ typedef struct	s_buf_floor
 	int			floor_tex_y;
 }				t_buf_floor;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	int			x;
 	float		camx;
@@ -90,14 +89,14 @@ typedef struct	s_ray
 	int			line_h;
 }				t_ray;
 
-typedef struct	s_plr
+typedef struct s_plr
 {
 	t_xy		coor;
 	t_xy		dir;
 	t_xy		plane;
 }				t_plr;
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	int			width;
 	int			height;
@@ -110,8 +109,7 @@ typedef struct	s_mlx
 	int			endian;
 }				t_mlx;
 
-//key заглавная буква - коэф  и будет индекс спрайта в t_texture *spr
-typedef struct			s_coor_spr
+typedef struct s_coor_spr
 {
 	t_xy				coor;
 	float				dist;
@@ -119,7 +117,14 @@ typedef struct			s_coor_spr
 	struct s_coor_spr	*next;
 }						t_coor_spr;
 
-typedef struct	s_wolf
+typedef struct s_key_flag
+{
+	int			move_w_s;
+	int			move_a_d;
+	int			rotate_l_r;
+}				t_key_flag;
+
+typedef struct s_wolf
 {
 	t_mlx		mlx;
 	t_plr		plr;
@@ -127,6 +132,7 @@ typedef struct	s_wolf
 	t_texture	*spr;
 	t_coor_spr	*coor_spr;
 	char		**map;
+	t_key_flag	flag;
 	int			cnt_tex_spr;
 }				t_wolf;
 
@@ -135,7 +141,6 @@ size_t			cnt_digit(int nbr);
 int				cnt_sep(char *str);
 int				check_min_cnt_flags(int *valid);
 int				read_map(char *flname, t_wolf *wolf);
-
 void			ft_texadd_back(t_texture **lst, t_texture *new);
 t_texture		*ft_texnew(int *tex, int w, int h, int key);
 t_texture		*find_texture(t_texture *head, int key);
@@ -145,12 +150,20 @@ int				valid_map(t_wolf *wolf);
 int				flood_fill(char **map, int i, int j);
 int				raycast(t_wolf *wolf);
 void			mlx_create(t_wolf *wolf);
-void			ft_texture_wall(t_texture *tex_list, t_ray *ray, t_plr *plr, t_mlx *mlx);
-void	ft_texture_cell_floor(t_ray *ray, t_mlx *mlx, t_plr *plr, t_texture *tex_list);
-
+void			ft_texture_wall(t_texture *tex_list,
+					t_ray *ray, t_plr *plr, t_mlx *mlx);
+void			ft_texture_cell_floor(t_ray *ray,
+					t_mlx *mlx, t_plr *plr, t_texture *tex_list);
 t_list			*ft_lstnew_cus(char const *content);
 void			ft_exit(char *error_message);
 void			ft_free_split(char **word);
-void	ft_sprite(t_wolf *wolf, float *zbuffer);
+void			ft_sprite(t_wolf *wolf, float *zbuffer);
+void			ft_dist_sprite(t_coor_spr *spr_list, t_plr *plr);
+void			ft_sort_sprite(t_coor_spr *head);
+int				ft_close(int param);
+void			ft_move_w(t_plr *plr, char **map);
+void			ft_move_a(t_plr *plr, char **map);
+void			ft_move_s(t_plr *plr, char **map);
+void			ft_move_d(t_plr *plr, char **map);
 
 #endif

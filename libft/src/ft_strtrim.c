@@ -72,7 +72,7 @@ static char	*ft_contain(int start, int finish, char *str, char const *s)
 	return (str);
 }
 
-char		*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
 	char	*str;
 	int		start;

@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-ssize_t		ft_check(char **file, char **line)
+ssize_t	ft_check(char **file, char **line)
 {
 	size_t		i;
 	char		*c_file;
@@ -33,13 +33,15 @@ ssize_t		ft_check(char **file, char **line)
 	return (1);
 }
 
-ssize_t		ft_read(const int fd, char *buf, char **file, char **line)
+ssize_t	ft_read(const int fd, char *buf, char **file, char **line)
 {
 	ssize_t		ret;
 	char		*tmp;
 
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	ret = 1;
+	while (ret > 0)
 	{
+		ret = read(fd, buf, BUFF_SIZE);
 		buf[ret] = '\0';
 		if (*file)
 		{
@@ -58,21 +60,20 @@ ssize_t		ft_read(const int fd, char *buf, char **file, char **line)
 	return (ret);
 }
 
-int			get_next_line(const int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
 	static char	*file[256];
 	ssize_t		ret;
 	char		*buf;
 
-	if (fd < 0 || !line || (read(fd, file[0], 0) < 0) ||
-			((buf = ft_memalloc(BUFF_SIZE + 1)) == NULL))
+	if (fd < 0 || !line || (read(fd, file[0], 0) < 0))
 		return (-1);
 	if (file[fd])
+	{
 		if (ft_check(&file[fd], line) == 1)
-		{
-			free(buf);
 			return (1);
-		}
+	}
+	buf = ft_memalloc(BUFF_SIZE + 1);
 	ret = ft_read(fd, buf, &file[fd], line);
 	free(buf);
 	if (ret != 0 || file[fd] == NULL || file[fd][0] == '\0')

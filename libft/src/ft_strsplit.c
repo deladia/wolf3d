@@ -28,17 +28,6 @@ static int	ft_nbrwrds(char const *s, char c)
 	return (nbrwrds);
 }
 
-static void	ft_free(char **arrstr, int j)
-{
-	while (j-- > 0)
-	{
-		free(arrstr[j]);
-		arrstr[j] = NULL;
-	}
-	free(arrstr);
-	arrstr = NULL;
-}
-
 static char	**ft_split(char const *s, char c, char **arrstr)
 {
 	size_t			lenwrd;
@@ -48,6 +37,7 @@ static char	**ft_split(char const *s, char c, char **arrstr)
 	i = 0;
 	j = 0;
 	while (s[i])
+	{
 		if (s[i] == c)
 			i++;
 		else
@@ -56,18 +46,14 @@ static char	**ft_split(char const *s, char c, char **arrstr)
 			while (s[i + lenwrd] && (s[i + lenwrd] != c))
 				lenwrd++;
 			arrstr[j++] = ft_strsub(s, i, lenwrd);
-			if (arrstr[j - 1] == NULL)
-			{
-				ft_free(arrstr, j);
-				return (NULL);
-			}
 			i = i + lenwrd;
 		}
+	}
 	arrstr[j] = 0;
 	return (arrstr);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char	**ft_strsplit(char const *s, char c)
 {
 	char			**arrstr;
 

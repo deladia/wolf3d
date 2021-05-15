@@ -1,8 +1,8 @@
 #include "libft.h"
 
-int		ft_strcmp_len(const char *s1, const char *s2)
+int	ft_strcmp_len(const char *s1, const char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_strlen(s1) != ft_strlen(s2))

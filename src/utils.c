@@ -100,28 +100,6 @@ size_t	cnt_digit(int nbr)
 	return (i);
 }
 
-// void	free_list(t_wolf *wolf)
-// {
-// 	t_texture	*tmp;
-
-// 	while (wolf->tex != NULL)
-// 	{
-// 		tmp = wolf->tex;
-// 		wolf->tex = wolf->tex->next;
-// 		if (tmp->image != NULL)
-// 			free(tmp->image);
-// 		free(tmp);
-// 	}
-// 	while (wolf->spr != NULL)
-// 	{
-// 		tmp = wolf->spr;
-// 		wolf->spr = wolf->spr->next;
-// 		if (tmp->image != NULL)
-// 			free(tmp->image);
-// 		free(tmp);
-// 	}
-// }
-
 t_list	*ft_lstnew_cus(char const *content)
 {
 	t_list *new;
@@ -134,6 +112,5 @@ t_list	*ft_lstnew_cus(char const *content)
 void	ft_exit(char *error_message)
 {
 	ft_putendl(error_message);
-	sleep(100000);
 	exit (-1);
 }

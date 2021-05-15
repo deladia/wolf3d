@@ -23,6 +23,8 @@ SRC				=	main.c \
 					texture_wall.c \
 					texture_cell_floor.c \
 					cast_sprite.c \
+					sort_sprite.c \
+					key_press.c \
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))
 OBJS			=	$(addprefix $(OBJS_DIR), $(OBJ))
