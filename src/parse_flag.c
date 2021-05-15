@@ -29,7 +29,10 @@ void	parse_texture(char *flname, t_wolf *wolf, int key)
 		ft_exit("Texture not .xpm format");
 	texture->image = (int *)mlx_get_data_addr(ptr, &bpp, &line_len, &endian);
 	if (key == s)
+	{
+		texture->key = wolf->cnt_tex_spr++;
 		ft_texadd_back(&wolf->spr, texture);
+	}
 	else
 		ft_texadd_back(&wolf->tex, texture);
 }
@@ -62,14 +65,10 @@ void	parse_color(char *word, t_wolf *wolf, int key)
 
 void	init_tex(char **word, t_wolf *wolf, int key)
 {
-	
-	printf("%s\n", word[0]);
 	if (cnt_word(word) != 2)
 		ft_exit("Wrong count param arg");
 	if (ft_strncmp(&(word[1][ft_strlen(word[1]) - 4]), ".xpm", 4) == 0)
 		parse_texture(word[1], wolf, key);
-	if (key == f || key == c)
+	else if (key == f || key == c)
 		parse_color(word[1], wolf, key);
 }
-
-//верунть вместо t_wolf -> t_texture

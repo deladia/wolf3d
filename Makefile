@@ -18,6 +18,11 @@ SRC				=	main.c \
 					parse_flag.c \
 					valid_map.c \
 					flood_fill.c \
+					raycast.c \
+					mlx_init.c \
+					texture_wall.c \
+					texture_cell_floor.c \
+					cast_sprite.c \
 
 SRCS			=	$(addprefix $(SRCS_DIR), $(SRC))
 OBJS			=	$(addprefix $(OBJS_DIR), $(OBJ))

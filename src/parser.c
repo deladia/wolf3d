@@ -67,25 +67,6 @@ void	move_map(t_list *list, t_wolf *wolf)
 	wolf->map[i] = NULL;
 }
 
-// void	valid_map(t_wolf *wolf)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (wolf->map[i] != NULL)
-// 	{
-// 		j = 0;
-// 		while(wolf->map[i][j] != '\0')
-// 		{
-// 			if (ft_strchr_ind("012P", wolf->map[i][j]) == 0)
-// 				ft_exit("Wrong sym in map");
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
 void	parse_map(int fd, char *line, t_wolf *wolf)
 {
 	t_list	*list;
@@ -134,6 +115,7 @@ int	read_map(char *flname, t_wolf *wolf)
 	}
 	close(fd);
 	if (check_min_cnt_flags(valid) != 0)
-		return (-5);
+		ft_exit("Not found one of flag");
+	free(valid);
 	return (0);
 }

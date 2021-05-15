@@ -6,8 +6,8 @@ void	init_plr(t_plr *plr, int x, int y)
 	plr->coor.y = (float)y + 0.5f;
 	plr->dir.x = -1;
 	plr->dir.y = 0;
-	plr->plane.x = 0.66f;
-	plr->plane.y = 0;
+	plr->plane.y = 0.66f;
+	plr->plane.x = 0;
 }
 
 void	init_spr(t_coor_spr **coor, int i, int j, char ch)
@@ -33,6 +33,7 @@ int	valid_map(t_wolf *wolf)
 		j = 0;
 		while (wolf->map[i][j] != '\0')
 		{
+			//проверка что игрок один
 			if (wolf->map[i][j] == 'P')
 				init_plr(&wolf->plr, i, j);
 			if (ft_isalpha_cap(wolf->map[i][j]) == 1 || wolf->map[i][j] == '0')
@@ -48,11 +49,11 @@ int	valid_map(t_wolf *wolf)
 		}
 		i++;
 	}
-	while(wolf->coor_spr != NULL)
-	{
-		printf("x = %f y = %f key = %d\n", wolf->coor_spr->coor.x, wolf->coor_spr->coor.y, wolf->coor_spr->key);
-		wolf->coor_spr = wolf->coor_spr->next;
-	}
-	printf("%f %f\n", wolf->plr.coor.x, wolf->plr.coor.y);
+	// while(wolf->coor_spr != NULL)
+	// {
+	// 	printf("x = %f y = %f key = %d\n", wolf->coor_spr->coor.x, wolf->coor_spr->coor.y, wolf->coor_spr->key);
+	// 	wolf->coor_spr = wolf->coor_spr->next;
+	// }
+	// printf("%f %f\n", wolf->plr.coor.x, wolf->plr.coor.y);
 	return (0);
 }

@@ -1,15 +1,16 @@
-R 1920 1080
+R 800 600
 NO ./textures/redbrick.xpm
 SO ./textures/redbrick.xpm     
 EA ./textures/redbrick.xpm
-WE ./textures/wall.xpm
+WE ./textures/purplestone.xpm
 S ./textures/redbrick.xpm
-S ./textures/redbrick.xpm
-S ./textures/redbrick.xpm
-F 100,0,255
-C 100,0,255
+S ./textures/purplestone.xpm
+S ./textures/barrel.xpm
+F ./textures/redbrick.xpm
+C ./textures/redbrick.xpm
 
-11111
-10001
-10PA1
-11111
+11111111111111
+1A0B0000000001
+10DC0000000001
+10000000F00P01
+11111111111111
