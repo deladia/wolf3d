@@ -87,7 +87,7 @@ int	raycast(t_wolf *wolf)
 	clear_arr(&wolf->mlx, wolf->tex);
 	while (ray.x < wolf->mlx.width)
 	{
-		ft_start_param(&param, wolf);
+		ft_start_param(&ray, wolf);
 		ft_delta_dist(&ray.ray_dir, &ray.delta_dist);
 		ft_step(&ray, &wolf->plr);
 		ft_dda(&ray, wolf->map);
