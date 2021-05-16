@@ -1,6 +1,6 @@
 #include "wolf3d.h"
 
-void	init_plr(t_plr *plr, int x, int y)
+void	init_plr(t_plr *plr, int x, int y, int *cnt_plr)
 {
 	plr->coor.x = (float)x + 0.5f;
 	plr->coor.y = (float)y + 0.5f;
@@ -8,6 +8,7 @@ void	init_plr(t_plr *plr, int x, int y)
 	plr->dir.y = 0;
 	plr->plane.y = 0.66f;
 	plr->plane.x = 0;
+	*cnt_plr += 1;
 }
 
 void	init_spr(t_coor_spr **coor, int i, int j, char ch)
@@ -26,16 +27,17 @@ int	valid_map(t_wolf *wolf)
 {
 	int	i;
 	int	j;
+	int	cnt_plr;
 
 	i = 0;
+	cnt_plr = 0;
 	while(wolf->map[i] != NULL)
 	{
 		j = 0;
 		while (wolf->map[i][j] != '\0')
 		{
-			//проверка что игрок один
 			if (wolf->map[i][j] == 'P')
-				init_plr(&wolf->plr, i, j);
+				init_plr(&wolf->plr, i, j, &cnt_plr);
 			if (ft_isalpha_cap(wolf->map[i][j]) == 1 || wolf->map[i][j] == '0')
 			{
 				if (wolf->map[i][j] != '0' && wolf->map[i][j] != 'P')
@@ -49,11 +51,7 @@ int	valid_map(t_wolf *wolf)
 		}
 		i++;
 	}
-	// while(wolf->coor_spr != NULL)
-	// {
-	// 	printf("x = %f y = %f key = %d\n", wolf->coor_spr->coor.x, wolf->coor_spr->coor.y, wolf->coor_spr->key);
-	// 	wolf->coor_spr = wolf->coor_spr->next;
-	// }
-	// printf("%f %f\n", wolf->plr.coor.x, wolf->plr.coor.y);
+	if (cnt_plr != 1)
+		ft_exit("Error number of Player");
 	return (0);
 }
