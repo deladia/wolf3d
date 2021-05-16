@@ -43,11 +43,12 @@ int	key_press(int keycode, t_wolf *wolf)
 	if (keycode == 124)
 		ft_rotate_r(&wolf->plr);
 	raycast(wolf);
-	mlx_put_image_to_window(wolf->mlx.mlx_ptr, wolf->mlx.mlx_win, wolf->mlx.img, 0, 0);
+	mlx_put_image_to_window(wolf->mlx.mlx_ptr,
+		wolf->mlx.mlx_win, wolf->mlx.img, 0, 0);
 	return (0);
 }
 
-void mlx_create(t_wolf *wolf)
+void	mlx_create(t_wolf *wolf)
 {
 	wolf->mlx.mlx_win = mlx_new_window(wolf->mlx.mlx_ptr,
 			wolf->mlx.width, wolf->mlx.height, "wolf3d");
@@ -56,7 +57,8 @@ void mlx_create(t_wolf *wolf)
 	wolf->mlx.addr = (int *)mlx_get_data_addr(wolf->mlx.img,
 			&wolf->mlx.bit_per_pixel, &wolf->mlx.line_len, &wolf->mlx.endian);
 	raycast(wolf);
-	mlx_put_image_to_window(wolf->mlx.mlx_ptr, wolf->mlx.mlx_win, wolf->mlx.img, 0, 0);
+	mlx_put_image_to_window(wolf->mlx.mlx_ptr,
+		wolf->mlx.mlx_win, wolf->mlx.img, 0, 0);
 	mlx_hook(wolf->mlx.mlx_win, 17, 0, ft_close, 0);
 	mlx_hook(wolf->mlx.mlx_win, 2, 0, key_press, wolf);
 	mlx_loop(wolf->mlx.mlx_ptr);

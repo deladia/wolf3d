@@ -6,7 +6,8 @@ void	init_r(char **word, t_wolf *wolf)
 		ft_exit("Wrong count param arg R");
 	wolf->mlx.width = ft_atoi(word[1]);
 	wolf->mlx.height = ft_atoi(word[2]);
-	if (ft_strlen(word[1]) != cnt_digit(wolf->mlx.width) || ft_strlen(word[2]) != cnt_digit(wolf->mlx.width))
+	if (ft_strlen(word[1]) != cnt_digit(wolf->mlx.width)
+		|| ft_strlen(word[2]) != cnt_digit(wolf->mlx.width))
 		ft_exit("Wrong format number arg R");
 	if (wolf->mlx.width > WIDTH || wolf->mlx.width < 1)
 		wolf->mlx.width = WIDTH;
@@ -24,7 +25,8 @@ void	parse_texture(char *flname, t_wolf *wolf, int key)
 
 	texture = (t_texture *)ft_memalloc(sizeof(t_texture));
 	texture->key = key;
-	ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, flname, &texture->width, &texture->height);
+	ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr,
+			flname, &texture->width, &texture->height);
 	if (ptr == NULL)
 		ft_exit("Texture not .xpm format");
 	texture->image = (int *)mlx_get_data_addr(ptr, &bpp, &line_len, &endian);
@@ -53,7 +55,8 @@ void	parse_color(char *word, t_wolf *wolf, int key)
 	while (i < 3)
 	{
 		tmp_color = ft_atoi(color[i]);
-		if (cnt_digit(tmp_color) == ft_strlen(color[i]) && tmp_color >= 0 && tmp_color <= 255)
+		if (cnt_digit(tmp_color) == ft_strlen(color[i])
+			&& tmp_color >= 0 && tmp_color <= 255)
 			clr |= tmp_color << ((2 - i) * 8);
 		else
 			ft_exit("Wrong color range arg F || C");

@@ -23,6 +23,19 @@ void	init_spr(t_coor_spr **coor, int i, int j, char ch)
 	*coor = tmp;
 }
 
+void	check_symbol(t_wolf *wolf, int i, int j)
+{
+	if (ft_isalpha_cap(wolf->map[i][j]) == 1 || wolf->map[i][j] == '0')
+	{
+		if (wolf->map[i][j] != '0' && wolf->map[i][j] != 'P')
+			init_spr(&wolf->coor_spr, i, j, wolf->map[i][j]);
+		if (flood_fill(wolf->map, i, j) != 0)
+			ft_exit("Flood fill error");
+	}
+	else if (wolf->map[i][j] != '1')
+		ft_exit("Wrong symbol in map");
+}
+
 int	valid_map(t_wolf *wolf)
 {
 	int	i;
@@ -31,22 +44,14 @@ int	valid_map(t_wolf *wolf)
 
 	i = 0;
 	cnt_plr = 0;
-	while(wolf->map[i] != NULL)
+	while (wolf->map[i] != NULL)
 	{
 		j = 0;
 		while (wolf->map[i][j] != '\0')
 		{
 			if (wolf->map[i][j] == 'P')
 				init_plr(&wolf->plr, i, j, &cnt_plr);
-			if (ft_isalpha_cap(wolf->map[i][j]) == 1 || wolf->map[i][j] == '0')
-			{
-				if (wolf->map[i][j] != '0' && wolf->map[i][j] != 'P')
-					init_spr(&wolf->coor_spr, i, j, wolf->map[i][j]);
-				if (flood_fill(wolf->map, i, j) != 0)
-					ft_exit("Flood fill error");
-			}
-			else if (wolf->map[i][j] != '1')
-				ft_exit("Wrong symbol in map");
+			check_symbol(wolf, i, j);
 			j++;
 		}
 		i++;

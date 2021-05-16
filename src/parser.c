@@ -1,28 +1,8 @@
 #include "wolf3d.h"
 
-void	check_flag(char **word, t_wolf *wolf, int *valid)
+void	check_flag_1(char **word, t_wolf *wolf, int *valid)
 {
-	if (ft_strcmp_len(word[0], "R") == 0 && valid[r] == 0)
-	{
-		valid[r] = 1;
-		init_r(word, wolf);
-	}
-	else if (ft_strcmp_len(word[0], "NO") == 0 && valid[no] == 0)
-	{
-		valid[no] = 1;
-		init_tex(word, wolf, no);
-	}
-	else if (ft_strcmp_len(word[0], "SO") == 0 && valid[so] == 0)
-	{
-		valid[so] = 1;
-		init_tex(word, wolf, so);
-	}
-	else if (ft_strcmp_len(word[0], "EA") == 0 && valid[ea] == 0)
-	{
-		valid[ea] = 1;
-		init_tex(word, wolf, ea);
-	}
-	else if (ft_strcmp_len(word[0], "WE") == 0 && valid[we] == 0)
+	if (ft_strcmp_len(word[0], "WE") == 0 && valid[we] == 0)
 	{
 		valid[we] = 1;
 		init_tex(word, wolf, we);
@@ -46,44 +26,30 @@ void	check_flag(char **word, t_wolf *wolf, int *valid)
 		ft_exit("Flag not found");
 }
 
-void	move_map(t_list *list, t_wolf *wolf)
+void	check_flag(char **word, t_wolf *wolf, int *valid)
 {
-	t_list	*tmp;
-	t_list	*ff;
-	int		i;
-
-	wolf->map = (char **)ft_memalloc((sizeof(char *) + 1) * ft_lstsize(list));
-	tmp = list;
-	i = 0;
-	while (tmp != NULL)
+	if (ft_strcmp_len(word[0], "R") == 0 && valid[r] == 0)
 	{
-		wolf->map[i] = (char *)tmp->content;
-		ff = tmp;
-		tmp = tmp->next;
-		free(ff);
-		// ff = NULL;
-		i++;
+		valid[r] = 1;
+		init_r(word, wolf);
 	}
-	wolf->map[i] = NULL;
-}
-
-void	parse_map(int fd, char *line, t_wolf *wolf)
-{
-	t_list	*list;
-
-	list = ft_lstnew_cus(line);
-	// free(line);
-	while (get_next_line(fd, &line) > 0)
+	else if (ft_strcmp_len(word[0], "NO") == 0 && valid[no] == 0)
 	{
-		if (line[0] == '\0')
-			ft_exit("Map broken");
-		ft_lstadd_back(&list, ft_lstnew_cus(line));
-		free(line);
+		valid[no] = 1;
+		init_tex(word, wolf, no);
 	}
-	move_map(list, wolf);
-	//free(list);
-	valid_map(wolf);
-	// wolf->plr.x = 5;
+	else if (ft_strcmp_len(word[0], "SO") == 0 && valid[so] == 0)
+	{
+		valid[so] = 1;
+		init_tex(word, wolf, so);
+	}
+	else if (ft_strcmp_len(word[0], "EA") == 0 && valid[ea] == 0)
+	{
+		valid[ea] = 1;
+		init_tex(word, wolf, ea);
+	}
+	else
+		check_flag_1(word, wolf, valid);
 }
 
 void	parse_flag(char *line, t_wolf *wolf, int *valid)
